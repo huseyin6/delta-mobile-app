@@ -6,7 +6,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useForm, Controller} from 'react-hook-form';
 import Users from '../../../Users/users';
 
-const ForgotPasswordScreen = () => {
+const NewPasswordScreen = () => {
   const navigation = useNavigation();
 
   let users = Users();
@@ -17,35 +17,15 @@ const ForgotPasswordScreen = () => {
     formState: {errors},
   } = useForm();
 
-  // const [mail, setMail] = useState('');
+  // const [code, setCode] = useState('');
+  // const [newPassword, setNewPassword] = useState('');
 
   const backSignIn = () => {
     navigation.navigate('SignIn');
   };
 
-  const onResendPressed = () => {
-    // navigation.navigate('SignIn');
-  };
-
-  let onSendPressed = data => {
-    navigation.navigate('NewPassword');
-
-    /*
-    if (data.password == data.password_repeat) {
-      for (let index = 0; index < users.length; index++) {
-        let element = users[index];
-        if (data.mail == element.mail) {
-          users[index].password = data.password;
-          navigation.navigate('SignIn', {users});
-          break;
-        } else {
-          console.warn('Incorrect E-Mail or Password');
-        }
-      }
-    } else {
-      console.warn('Passwords do not match!');
-    }
-    */
+  let onSubmitPressed = data => {
+    navigation.navigate('SignIn');
   };
 
   return (
@@ -53,24 +33,46 @@ const ForgotPasswordScreen = () => {
       <View style={styles.root}>
         <Text style={styles.title}>Reset Your Password</Text>
         <CustomInput
-          placeholder="Enter your mail here"
+          placeholder="Enter your confirmation code"
           control={control}
-          name="mail"
-          rules={{required: 'The e-mail is required'}}
+          name="code"
+          rules={{required: 'The code is required'}}
         />
 
-        <CustomButton text="Send" onPress={handleSubmit(onSendPressed)} />
+        <CustomInput
+          placeholder="New password"
+          control={control}
+          name="password"
+          secureTextEntry={true}
+          rules={{
+            required: 'Password is required',
+            minLength: {
+              value: 3,
+              message: 'Password should be minimum 3 characters long',
+            },
+          }}
+        />
+
+        <CustomInput
+          placeholder="Repeat new password"
+          control={control}
+          secureTextEntry={true}
+          name="re-password"
+          rules={{
+            required: 'Password is required',
+            minLength: {
+              value: 3,
+              message: 'Password should be minimum 3 characters long',
+            },
+          }}
+        />
+
+        <CustomButton text="Submit" onPress={handleSubmit(onSubmitPressed)} />
 
         <CustomButton
           text="Back to Sign In"
           onPress={backSignIn}
           type="TERTIARY"
-        />
-
-        <CustomButton
-          text="Resend Code"
-          onPress={handleSubmit(onResendPressed)}
-          type="SECONDARY"
         />
       </View>
     </ScrollView>
@@ -119,4 +121,4 @@ const styles = StyleSheet.create({
   */
 });
 
-export default ForgotPasswordScreen;
+export default NewPasswordScreen;

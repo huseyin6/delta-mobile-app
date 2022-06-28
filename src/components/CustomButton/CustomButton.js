@@ -35,11 +35,20 @@ const styles = StyleSheet.create({
     backgroundColor: '#2F5AC2',
   },
 
+  container_SECONDARY: {
+    borderColor: '#3B71F3',
+    borderWidth: 2,
+  },
+
   container_TERTIARY: {},
 
   text: {
     fontWeight: 'bold',
     color: 'white',
+  },
+
+  text_SECONDARY: {
+    color: 'blue',
   },
 
   text_TERTIARY: {

@@ -13,6 +13,7 @@ import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
 import {useForm, Controller} from 'react-hook-form';
 import Users from '../../../Users/users';
+import axios from '../../../axios';
 
 function SignInScreen() {
   // const {mail, setMail} = useState('');
@@ -30,13 +31,41 @@ function SignInScreen() {
     formState: {errors},
   } = useForm();
 
-  const onSignInPressed = data => {
-    //console.log(data);
+  const [loading, setLoading] = useState(false);
+
+  const onSignInPressed = async ss => {
+    //  console.log(data);
+    if (loading) {
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await axios.get('/users');
+      // const response = await axios.get(); ====> RETURNS HELLO MESSAGE
+      console.log(response.data);
+      /*
+      if (response.status === 200) {
+        //console.log(response.data);
+        const {user} = response.data;
+        const role = user.role;
+        localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify(user));
+        setAlertContent('Başarıyla giriş yapıldı');
+        setAlertType(true);
+        setAlert(true);
+        handleRoleNavigate(role);
+      }*/
+    } catch (error) {
+      Alert.alert('Oops', error.message);
+    }
+    setLoading(false);
+    /*
     if (data.mail == users[0].mail && data.password == users[0].password) {
       navigation.navigate('Home');
     } else {
       console.warn('FAILED');
-    }
+    }*/
   };
 
   const onForgotPasswordPressed = () => {
@@ -70,8 +99,8 @@ function SignInScreen() {
         rules={{
           required: 'Password is required',
           minLength: {
-            value: 3,
-            message: 'Password should be minimum 3 characters long',
+            value: 6,
+            message: 'Password should be minimum 6 characters long',
           },
         }}
       />

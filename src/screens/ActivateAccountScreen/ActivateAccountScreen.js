@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import React from 'react';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
@@ -18,73 +18,63 @@ const ActivateAccountScreen = () => {
     formState: {errors},
   } = useForm();
 
-  let onActivatePressed = data => {
-    if (data.password == data.password_repeat) {
-      for (let index = 0; index < users.length; index++) {
-        let element = users[index];
-        if (data.mail == element.mail) {
-          //const [users[index].is_active, setActive] = useState(1);
-          navigation.navigate('SignIn');
-          break;
-        } else {
-          console.warn('Could not activated!');
-        }
-      }
-    } else {
-      console.warn('Passwords do not match!');
-    }
-  };
+  // const [mail, setMail] = useState('');
 
   const backSignIn = () => {
     navigation.navigate('SignIn');
   };
 
+  const onResendPressed = () => {
+    // navigation.navigate('SignIn');
+  };
+
+  let onSendPressed = data => {
+    navigation.navigate('NewPassword');
+
+    /*
+    if (data.password == data.password_repeat) {
+      for (let index = 0; index < users.length; index++) {
+        let element = users[index];
+        if (data.mail == element.mail) {
+          users[index].password = data.password;
+          navigation.navigate('SignIn', {users});
+          break;
+        } else {
+          console.warn('Incorrect E-Mail or Password');
+        }
+      }
+    } else {
+      console.warn('Passwords do not match!');
+    }
+    */
+  };
+
   return (
-    <View style={styles.root}>
-      <Text style={styles.title}>Activate Your Account</Text>
-      <CustomInput
-        placeholder="E-Mail"
-        control={control}
-        name="mail"
-        rules={{required: 'E-Mail is required'}}
-      />
+    <ScrollView showsVerticalScrollIndicator={false}>
+      <View style={styles.root}>
+        <Text style={styles.title}>Activate Your Account</Text>
+        <CustomInput
+          placeholder="Enter your mail here"
+          control={control}
+          name="mail"
+          rules={{required: 'The e-mail is required'}}
+        />
 
-      <CustomInput
-        placeholder="Password"
-        control={control}
-        name="password"
-        secureTextEntry={true}
-        rules={{
-          required: 'Password is required',
-          minLength: {
-            value: 3,
-            message: 'Password should be minimum 3 characters long',
-          },
-        }}
-      />
+        <CustomButton text="Send" onPress={handleSubmit(onSendPressed)} />
 
-      <CustomInput
-        placeholder="Repeat Password"
-        control={control}
-        name="password_repeat"
-        secureTextEntry={true}
-        rules={{
-          required: 'Password is required',
-          minLength: {
-            value: 3,
-            message: 'Password should be minimum 3 characters long',
-          },
-        }}
-      />
+        <CustomButton
+          text="Back to Sign In"
+          onPress={backSignIn}
+          type="TERTIARY"
+        />
 
-      <CustomButton text="Confirm" onPress={handleSubmit(onActivatePressed)} />
-
-      <CustomButton
-        text="Back to Sign In"
-        onPress={backSignIn}
-        type="TERTIARY"
-      />
-    </View>
+        <CustomButton
+          text="Resend Code"
+          onPress={handleSubmit(onResendPressed)}
+          type="SECONDARY"
+        />
+      </View>
+    </ScrollView>
   );
 };
 
