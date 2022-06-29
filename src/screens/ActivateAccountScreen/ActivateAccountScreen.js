@@ -21,10 +21,6 @@ const ActivateAccountScreen = () => {
     navigation.navigate('SignIn');
   };
 
-  const onResendPressed = () => {
-    // navigation.navigate('SignIn');
-  };
-
   let onSendPressed = data => {
     navigation.navigate('CodeConfirmation');
     //navigation.navigate('NewPassword');

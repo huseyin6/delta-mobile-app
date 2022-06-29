@@ -20,10 +20,6 @@ const ForgotPasswordScreen = () => {
     navigation.navigate('SignIn');
   };
 
-  const onResendPressed = () => {
-    // navigation.navigate('SignIn');
-  };
-
   let onSendPressed = data => {
     navigation.navigate('CodeConfirmation');
   };
