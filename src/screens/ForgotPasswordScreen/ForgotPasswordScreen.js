@@ -4,12 +4,9 @@ import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
 import {useForm, Controller} from 'react-hook-form';
-import Users from '../../../Users/users';
 
 const ForgotPasswordScreen = () => {
   const navigation = useNavigation();
-
-  let users = Users();
 
   const {
     control,
@@ -28,24 +25,7 @@ const ForgotPasswordScreen = () => {
   };
 
   let onSendPressed = data => {
-    navigation.navigate('NewPassword');
-
-    /*
-    if (data.password == data.password_repeat) {
-      for (let index = 0; index < users.length; index++) {
-        let element = users[index];
-        if (data.mail == element.mail) {
-          users[index].password = data.password;
-          navigation.navigate('SignIn', {users});
-          break;
-        } else {
-          console.warn('Incorrect E-Mail or Password');
-        }
-      }
-    } else {
-      console.warn('Passwords do not match!');
-    }
-    */
+    navigation.navigate('CodeConfirmation');
   };
 
   return (
@@ -66,12 +46,6 @@ const ForgotPasswordScreen = () => {
           onPress={backSignIn}
           type="TERTIARY"
         />
-
-        <CustomButton
-          text="Resend Code"
-          onPress={handleSubmit(onResendPressed)}
-          type="SECONDARY"
-        />
       </View>
     </ScrollView>
   );
@@ -88,35 +62,6 @@ const styles = StyleSheet.create({
     color: '#051C60',
     margin: 10,
   },
-
-  /*
-          <CustomInput
-          placeholder="Password"
-          control={control}
-          name="password"
-          secureTextEntry={true}
-          rules={{
-            required: 'Password is required',
-            minLength: {
-              value: 3,
-              message: 'Password should be minimum 3 characters long',
-            },
-          }}
-        />
-        <CustomInput
-          placeholder="Repeat Password"
-          control={control}
-          name="password_repeat"
-          secureTextEntry={true}
-          rules={{
-            required: 'Password is required',
-            minLength: {
-              value: 3,
-              message: 'Password should be minimum 3 characters long',
-            },
-          }}
-        />
-  */
 });
 
 export default ForgotPasswordScreen;

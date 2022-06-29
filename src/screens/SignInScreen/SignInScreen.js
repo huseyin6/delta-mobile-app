@@ -5,6 +5,7 @@ import {
   StyleSheet,
   useWindowDimensions,
   TextInput,
+  Alert,
 } from 'react-native';
 import React, {useState} from 'react';
 import Logo from '../../../assets/images/Logo.jpg';
@@ -33,7 +34,7 @@ function SignInScreen() {
 
   const [loading, setLoading] = useState(false);
 
-  const onSignInPressed = async ss => {
+  const onSignInPressed = async info => {
     //  console.log(data);
     if (loading) {
       return;
@@ -41,21 +42,23 @@ function SignInScreen() {
 
     setLoading(true);
     try {
-      const response = await axios.get('/users');
+      const response = await axios.get('/hello');
       // const response = await axios.get(); ====> RETURNS HELLO MESSAGE
-      console.log(response.data);
+
       /*
+      const response = await axios.post('/login', {
+        ...info,
+      });
+      */
+
+      console.log(response.data);
+
       if (response.status === 200) {
-        //console.log(response.data);
-        const {user} = response.data;
-        const role = user.role;
-        localStorage.setItem('token', token);
-        localStorage.setItem('user', JSON.stringify(user));
-        setAlertContent('Başarıyla giriş yapıldı');
-        setAlertType(true);
-        setAlert(true);
-        handleRoleNavigate(role);
-      }*/
+        // console.log(response.data);
+        // const {user} = response.data;
+        // const role = user.role;
+        navigation.navigate('Home');
+      }
     } catch (error) {
       Alert.alert('Oops', error.message);
     }
@@ -107,10 +110,15 @@ function SignInScreen() {
 
       <CustomButton text="Sign In" onPress={handleSubmit(onSignInPressed)} />
       <CustomButton
-        text="Forgot Password?"
+        text="Forgotten Password?"
         onPress={onForgotPasswordPressed}
         type="TERTIARY"
       />
+
+      <Text style={{fontWeight: 'bold', color: 'black', fontSize: 15}}>
+        ────────────── or ──────────────{'\n'}
+      </Text>
+
       <CustomButton
         text="Active My Account"
         onPress={onActiveAccountPressed}

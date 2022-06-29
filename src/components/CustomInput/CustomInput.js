@@ -17,11 +17,9 @@ const CustomInput = ({
       render={({field: {value, onChange, onBlur}, fieldState: {error}}) => (
         <>
           <View
-            style={[
-              styles.container,
-              {borderColor: error ? 'red' : '#e8e8e8'},
-            ]}>
+            style={[styles.container, {borderColor: error ? 'red' : 'black'}]}>
             <TextInput
+              placeholderTextColor="#191970"
               value={value}
               onChangeText={onChange}
               onBlur={onBlur}
@@ -43,9 +41,10 @@ const CustomInput = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroudColor: '#a2a2a2',
+    backgroudColor: '#404040',
     width: '100%',
-    borderColor: '#e8e8e8',
+    borderColor: 'black',
+    //borderColor: '#e8e8e8',
     borderWidth: 1,
     borderRadius: 5,
 

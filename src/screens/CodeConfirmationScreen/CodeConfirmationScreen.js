@@ -4,9 +4,8 @@ import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
 import {useForm, Controller} from 'react-hook-form';
-import {useState} from 'react';
 
-const ActivateAccountScreen = () => {
+const ForgotPasswordScreen = () => {
   const navigation = useNavigation();
 
   const {
@@ -14,8 +13,6 @@ const ActivateAccountScreen = () => {
     handleSubmit,
     formState: {errors},
   } = useForm();
-
-  // const [mail, setMail] = useState('');
 
   const backSignIn = () => {
     navigation.navigate('SignIn');
@@ -25,28 +22,42 @@ const ActivateAccountScreen = () => {
     // navigation.navigate('SignIn');
   };
 
-  let onSendPressed = data => {
-    navigation.navigate('CodeConfirmation');
-    //navigation.navigate('NewPassword');
+  let onContinuePressed = data => {
+    navigation.navigate('NewPassword');
   };
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.root}>
-        <Text style={styles.title}>Activate Your Account</Text>
+        <Text style={styles.title}>Confirm Code</Text>
+        <Text style={{fontWeight: 'bold', color: 'black', fontSize: 15}}>
+          We have sent your code to your e-mail!
+        </Text>
+        <Text style={{fontWeight: 'bold', color: 'black', fontSize: 15}}>
+          Please check your mail-box.
+        </Text>
         <CustomInput
-          placeholder="Enter your mail here"
+          placeholder="Enter the code here"
           control={control}
-          name="mail"
-          rules={{required: 'The e-mail is required'}}
+          name="code"
+          //rules={{required: 'The code is required'}}
         />
 
-        <CustomButton text="Send" onPress={handleSubmit(onSendPressed)} />
+        <CustomButton
+          text="Continue"
+          onPress={handleSubmit(onContinuePressed)}
+        />
 
         <CustomButton
           text="Back to Sign In"
           onPress={backSignIn}
           type="TERTIARY"
+        />
+
+        <CustomButton
+          text="Resend Code"
+          onPress={handleSubmit(onResendPressed)}
+          type="SECONDARY"
         />
       </View>
     </ScrollView>
@@ -66,4 +77,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ActivateAccountScreen;
+export default ForgotPasswordScreen;

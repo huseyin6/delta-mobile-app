@@ -4,12 +4,9 @@ import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
 import {useForm, Controller} from 'react-hook-form';
-import Users from '../../../Users/users';
 
 const NewPasswordScreen = () => {
   const navigation = useNavigation();
-
-  let users = Users();
 
   const {
     control,
@@ -47,8 +44,8 @@ const NewPasswordScreen = () => {
           rules={{
             required: 'Password is required',
             minLength: {
-              value: 3,
-              message: 'Password should be minimum 3 characters long',
+              value: 6,
+              message: 'Password should be minimum 6 characters long',
             },
           }}
         />
@@ -61,8 +58,8 @@ const NewPasswordScreen = () => {
           rules={{
             required: 'Password is required',
             minLength: {
-              value: 3,
-              message: 'Password should be minimum 3 characters long',
+              value: 6,
+              message: 'Password should be minimum 6 characters long',
             },
           }}
         />
