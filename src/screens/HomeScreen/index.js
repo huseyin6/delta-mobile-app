@@ -2,13 +2,19 @@ import {View, Text, StyleSheet, Pressable} from 'react-native';
 import React from 'react';
 import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
+import axios from '../../../axios';
 
 const Index = () => {
   const navigation = useNavigation();
 
-  const onLogoutPressed = () => {
+  const onLogoutPressed = async () => {
     // console.warn('Sign in');
-    navigation.navigate('SignIn');
+    try {
+      const response = await axios.get('/logout');
+      if (response.status == 200) {
+        navigation.navigate('SignIn');
+      }
+    } catch (error) {}
   };
 
   return (

@@ -42,14 +42,15 @@ function SignInScreen() {
 
     setLoading(true);
     try {
-      const response = await axios.get('/hello');
+      // const response = await axios.get('/hello');
       // const response = await axios.get(); ====> RETURNS HELLO MESSAGE
+      // const response = await axios.get('/users');
 
-      /*
+      // const response = await axios.get('/logout');
+
       const response = await axios.post('/login', {
         ...info,
       });
-      */
 
       console.log(response.data);
 
@@ -90,7 +91,7 @@ function SignInScreen() {
       <CustomInput
         placeholder="E-Mail"
         control={control}
-        name="mail"
+        name="email"
         rules={{required: 'E-Mail is required'}}
       />
 
