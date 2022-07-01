@@ -13,7 +13,6 @@ import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
 import {useForm, Controller} from 'react-hook-form';
-import Users from '../../../Users/users';
 import axios from '../../../axios';
 
 function SignInScreen() {
@@ -23,8 +22,6 @@ function SignInScreen() {
   const {height} = useWindowDimensions();
 
   const navigation = useNavigation();
-
-  const users = Users();
 
   const {
     control,
@@ -52,7 +49,7 @@ function SignInScreen() {
         ...info,
       });
 
-      console.log(response.data);
+      // console.log(response.data);
 
       if (response.status === 200) {
         // console.log(response.data);
@@ -61,6 +58,7 @@ function SignInScreen() {
         navigation.navigate('Home');
       }
     } catch (error) {
+      console.log(error);
       Alert.alert('Oops', error.message);
     }
     setLoading(false);

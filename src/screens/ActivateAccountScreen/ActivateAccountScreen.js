@@ -30,6 +30,9 @@ const ActivateAccountScreen = () => {
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.root}>
         <Text style={styles.title}>Activate Your Account</Text>
+        <Text style={{fontWeight: 'bold', color: 'black', fontSize: 15}}>
+          We will send you confirmation link to your E-Mail...
+        </Text>
         <CustomInput
           placeholder="Enter your mail here"
           control={control}

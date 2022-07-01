@@ -41,7 +41,7 @@ const CustomInput = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroudColor: '#404040',
+    backgroudColor: 'black',
     width: '100%',
     borderColor: 'black',
     //borderColor: '#e8e8e8',
