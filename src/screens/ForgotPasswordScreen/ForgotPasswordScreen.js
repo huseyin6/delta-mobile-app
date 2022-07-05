@@ -1,9 +1,10 @@
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, Alert} from 'react-native';
 import React, {useState} from 'react';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
 import {useForm, Controller} from 'react-hook-form';
+import axios from '../../../axios';
 
 const ForgotPasswordScreen = () => {
   const navigation = useNavigation();
@@ -20,8 +21,31 @@ const ForgotPasswordScreen = () => {
     navigation.navigate('SignIn');
   };
 
-  let onSendPressed = data => {
-    navigation.navigate('CodeConfirmation');
+  const onSendPressed = async data => {
+    try {
+      const response = await axios.post('/registration', {
+        ...data,
+      });
+
+      if (response.status === 200) {
+        Alert.alert(
+          'Confirm',
+          '   To continue activate your account, press the link we have sent to your mail',
+        );
+        try {
+          const link_response = await axios.get('/activate_account/confirm');
+          if (link_response.status === 200) {
+            navigation.navigate('NewPassword');
+          }
+        } catch (error) {
+          console.log(error);
+          //Alert.alert('Oops', error.message);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+      Alert.alert('Oops', error.message);
+    }
   };
 
   return (
@@ -34,7 +58,7 @@ const ForgotPasswordScreen = () => {
         <CustomInput
           placeholder="Enter your mail here"
           control={control}
-          name="mail"
+          name="email"
           rules={{required: 'The e-mail is required'}}
         />
 

@@ -24,6 +24,7 @@ const Index = () => {
           fontSize: 40,
           alignSelf: 'center',
           padding: 30,
+          color: '#191970',
         }}>
         Home Page
       </Text>

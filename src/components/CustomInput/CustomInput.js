@@ -19,6 +19,7 @@ const CustomInput = ({
           <View
             style={[styles.container, {borderColor: error ? 'red' : 'black'}]}>
             <TextInput
+              color="black"
               placeholderTextColor="#191970"
               value={value}
               onChangeText={onChange}

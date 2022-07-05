@@ -1,10 +1,19 @@
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Alert,
+  Platform,
+  Linking,
+} from 'react-native';
 import React from 'react';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
 import {useForm, Controller} from 'react-hook-form';
 import {useState} from 'react';
+import axios from '../../../axios';
 
 const ActivateAccountScreen = () => {
   const navigation = useNavigation();
@@ -15,15 +24,29 @@ const ActivateAccountScreen = () => {
     formState: {errors},
   } = useForm();
 
-  // const [mail, setMail] = useState('');
+  // const [mail, setMail] = useState('')
 
   const backSignIn = () => {
     navigation.navigate('SignIn');
   };
 
-  let onSendPressed = data => {
-    navigation.navigate('CodeConfirmation');
-    //navigation.navigate('NewPassword');
+  const onSendPressed = async data => {
+    try {
+      const response = await axios.post('/registration', {
+        ...data,
+      });
+
+      if (response.status === 200) {
+        Alert.alert(
+          'Confirm',
+          '   To continue activate your account, press the link we have sent to your mail',
+        );
+        // navigation.navigate('Nav');
+      }
+    } catch (error) {
+      console.log(error);
+      Alert.alert('Oops', error.message);
+    }
   };
 
   return (
@@ -36,7 +59,7 @@ const ActivateAccountScreen = () => {
         <CustomInput
           placeholder="Enter your mail here"
           control={control}
-          name="mail"
+          name="email"
           rules={{required: 'The e-mail is required'}}
         />
 

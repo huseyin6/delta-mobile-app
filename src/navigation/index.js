@@ -1,4 +1,4 @@
-import {View, Text} from 'react-native';
+import {View, Text, AppRegistry} from 'react-native';
 import React from 'react';
 
 import {NavigationContainer} from '@react-navigation/native';
@@ -10,6 +10,8 @@ import ForgotPasswordScreen from '../screens/ForgotPasswordScreen';
 import ActivateAccountScreen from '../screens/ActivateAccountScreen';
 import NewPasswordScreen from '../screens/NewPasswordScreen';
 import CodeConfirmationScreen from '../screens/CodeConfirmationScreen';
+// import Nav from './Nav';
+// <Stack.Screen name="Nav" component={Nav} />
 
 const Stack = createNativeStackNavigator();
 

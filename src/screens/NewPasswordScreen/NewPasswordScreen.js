@@ -16,12 +16,20 @@ const NewPasswordScreen = () => {
 
   // const [code, setCode] = useState('');
   // const [newPassword, setNewPassword] = useState('');
+  /*
+        <CustomInput
+          placeholder="Enter your confirmation code"
+          control={control}
+          name="code"
+          rules={{required: 'The code is required'}}
+        />
+  */
 
   const backSignIn = () => {
     navigation.navigate('SignIn');
   };
 
-  let onSubmitPressed = data => {
+  const onSubmitPressed = data => {
     navigation.navigate('SignIn');
   };
 
@@ -29,12 +37,6 @@ const NewPasswordScreen = () => {
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.root}>
         <Text style={styles.title}>Reset Your Password</Text>
-        <CustomInput
-          placeholder="Enter your confirmation code"
-          control={control}
-          name="code"
-          rules={{required: 'The code is required'}}
-        />
 
         <CustomInput
           placeholder="New password"
