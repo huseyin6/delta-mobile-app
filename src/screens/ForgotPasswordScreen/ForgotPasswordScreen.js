@@ -23,24 +23,14 @@ const ForgotPasswordScreen = () => {
 
   const onSendPressed = async data => {
     try {
-      const response = await axios.post('/registration', {
+      const response = await axios.post('/forgot_password', {
         ...data,
       });
 
       if (response.status === 200) {
-        Alert.alert(
-          'Confirm',
-          '   To continue activate your account, press the link we have sent to your mail',
-        );
-        try {
-          const link_response = await axios.get('/activate_account/confirm');
-          if (link_response.status === 200) {
-            navigation.navigate('NewPassword');
-          }
-        } catch (error) {
-          console.log(error);
-          //Alert.alert('Oops', error.message);
-        }
+        const token = response.data;
+        // console.log(token);
+        navigation.navigate('ResetPassword', {token});
       }
     } catch (error) {
       console.log(error);

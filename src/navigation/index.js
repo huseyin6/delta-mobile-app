@@ -8,8 +8,10 @@ import SignInScreen from '../screens/SignInScreen';
 import HomeScreen from '../screens/HomeScreen';
 import ForgotPasswordScreen from '../screens/ForgotPasswordScreen';
 import ActivateAccountScreen from '../screens/ActivateAccountScreen';
-import NewPasswordScreen from '../screens/NewPasswordScreen';
+// import NewPasswordScreen from '../screens/NewPasswordScreen';
 import CodeConfirmationScreen from '../screens/CodeConfirmationScreen';
+import ResetPasswordScreen from '../screens/ResetPasswordScreen';
+import GeneratePasswordScreen from '../screens/GeneratePasswordScreen';
 // import Nav from './Nav';
 // <Stack.Screen name="Nav" component={Nav} />
 
@@ -26,10 +28,15 @@ const Navigaton = () => {
           name="ActivateAccount"
           component={ActivateAccountScreen}
         />
-        <Stack.Screen name="NewPassword" component={NewPasswordScreen} />
+
         <Stack.Screen
           name="CodeConfirmation"
           component={CodeConfirmationScreen}
+        />
+        <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
+        <Stack.Screen
+          name="GeneratePassword"
+          component={GeneratePasswordScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

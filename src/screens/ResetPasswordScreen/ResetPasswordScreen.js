@@ -1,11 +1,15 @@
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, Alert} from 'react-native';
 import React, {useState} from 'react';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
 import {useForm, Controller} from 'react-hook-form';
+import axios from '../../../axios';
 
-const NewPasswordScreen = () => {
+const ResetPasswordScreen = ({route}) => {
+  const token = route.params.token;
+  // console.log(token);
+
   const navigation = useNavigation();
 
   const {
@@ -14,23 +18,27 @@ const NewPasswordScreen = () => {
     formState: {errors},
   } = useForm();
 
-  // const [code, setCode] = useState('');
-  // const [newPassword, setNewPassword] = useState('');
-  /*
-        <CustomInput
-          placeholder="Enter your confirmation code"
-          control={control}
-          name="code"
-          rules={{required: 'The code is required'}}
-        />
-  */
-
   const backSignIn = () => {
     navigation.navigate('SignIn');
   };
 
-  const onSubmitPressed = data => {
-    navigation.navigate('SignIn');
+  const onSubmitPressed = async data => {
+    // console.log(token);
+    try {
+      const response = await axios.post(
+        '/reset_password/confirm?token=' + token,
+        {
+          ...data,
+        },
+      );
+
+      if (response.status === 200) {
+        navigation.navigate('SignIn');
+      }
+    } catch (error) {
+      console.log(error);
+      Alert.alert('Oops', error.message);
+    }
   };
 
   return (
@@ -56,7 +64,7 @@ const NewPasswordScreen = () => {
           placeholder="Repeat new password"
           control={control}
           secureTextEntry={true}
-          name="re-password"
+          name="passwordAgain"
           rules={{
             required: 'Password is required',
             minLength: {
@@ -89,35 +97,6 @@ const styles = StyleSheet.create({
     color: '#051C60',
     margin: 10,
   },
-
-  /*
-          <CustomInput
-          placeholder="Password"
-          control={control}
-          name="password"
-          secureTextEntry={true}
-          rules={{
-            required: 'Password is required',
-            minLength: {
-              value: 3,
-              message: 'Password should be minimum 3 characters long',
-            },
-          }}
-        />
-        <CustomInput
-          placeholder="Repeat Password"
-          control={control}
-          name="password_repeat"
-          secureTextEntry={true}
-          rules={{
-            required: 'Password is required',
-            minLength: {
-              value: 3,
-              message: 'Password should be minimum 3 characters long',
-            },
-          }}
-        />
-  */
 });
 
-export default NewPasswordScreen;
+export default ResetPasswordScreen;

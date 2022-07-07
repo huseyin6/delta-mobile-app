@@ -1,12 +1,4 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  Alert,
-  Platform,
-  Linking,
-} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, Alert} from 'react-native';
 import React from 'react';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
@@ -37,11 +29,8 @@ const ActivateAccountScreen = () => {
       });
 
       if (response.status === 200) {
-        Alert.alert(
-          'Confirm',
-          '   To continue activate your account, press the link we have sent to your mail',
-        );
-        // navigation.navigate('Nav');
+        const token = response.data;
+        navigation.navigate('GeneratePassword', {token});
       }
     } catch (error) {
       console.log(error);

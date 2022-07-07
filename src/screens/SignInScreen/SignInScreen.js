@@ -101,8 +101,8 @@ function SignInScreen() {
         rules={{
           required: 'Password is required',
           minLength: {
-            value: 6,
-            message: 'Password should be minimum 6 characters long',
+            value: 3,
+            message: 'Password should be minimum 3 characters long',
           },
         }}
       />
