@@ -37,18 +37,12 @@ public class MainApplication extends Application implements ReactApplication {
         protected String getJSMainModuleName() {
           return "index";
         }
-      };
 
-    private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
-      ...
-      // 2. Override the getJSBundleFile method to let
-      // the CodePush runtime determine where to get the JS
-      // bundle location from on each app start
-      @Override
-      protected String getJSBundleFile() {
+        @Override
+        protected String getJSBundleFile() {
           return CodePush.getJSBundleFile();
-      }
-    };
+        }
+      };
 
   private final ReactNativeHost mNewArchitectureNativeHost =
       new MainApplicationReactNativeHost(this);
