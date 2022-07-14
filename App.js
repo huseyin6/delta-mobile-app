@@ -8,6 +8,8 @@
 
 import React from 'react';
 
+import codePush from 'react-native-code-push';
+
 import {SafeAreaView, StyleSheet, Text} from 'react-native';
 
 // import SignInScreen from './src/screens/SignInScreen';
@@ -28,4 +30,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default codePush(App);
