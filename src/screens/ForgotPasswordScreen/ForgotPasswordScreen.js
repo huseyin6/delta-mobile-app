@@ -28,9 +28,10 @@ const ForgotPasswordScreen = () => {
       });
 
       if (response.status === 200) {
-        const token = response.data;
+        //const token = response.data;
         // console.log(token);
-        navigation.navigate('ResetPassword', {token});
+        // navigation.navigate('ResetPassword', {token});
+        navigation.navigate('ConfirmScreen');
       }
     } catch (error) {
       console.log(error);

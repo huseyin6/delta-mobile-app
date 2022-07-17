@@ -29,8 +29,9 @@ const ActivateAccountScreen = () => {
       });
 
       if (response.status === 200) {
-        const token = response.data;
-        navigation.navigate('GeneratePassword', {token});
+        //const token = response.data;
+        //navigation.navigate('GeneratePassword', {token});
+        navigation.navigate('ConfirmScreen');
       }
     } catch (error) {
       console.log(error);

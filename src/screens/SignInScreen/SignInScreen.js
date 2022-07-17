@@ -5,6 +5,7 @@ import {
   StyleSheet,
   useWindowDimensions,
   TextInput,
+  TouchableOpacity,
   Alert,
 } from 'react-native';
 import React, {useState} from 'react';
@@ -30,6 +31,7 @@ function SignInScreen() {
   } = useForm();
 
   const [loading, setLoading] = useState(false);
+  const [isSecureEntry, setIsSecureEntry] = useState(true);
 
   const onSignInPressed = async info => {
     //  console.log(data);
@@ -56,6 +58,10 @@ function SignInScreen() {
         // const {user} = response.data;
         // const role = user.role;
         navigation.navigate('Home');
+      }
+
+      if (response.status === 401) {
+        Alert.alert('Oops', 'Wrong password or username.. Please try again!');
       }
     } catch (error) {
       console.log(error);
@@ -97,7 +103,16 @@ function SignInScreen() {
         placeholder="Password"
         control={control}
         name="password"
-        secureTextEntry={true}
+        secureTextEntry={isSecureEntry}
+        icon={
+          <TouchableOpacity
+            onPress={() => {
+              setIsSecureEntry(prev => !prev);
+            }}>
+            <Text>{isSecureEntry ? 'Hide' : 'Show'}</Text>
+          </TouchableOpacity>
+        }
+        iconPosition="right"
         rules={{
           required: 'Password is required',
           minLength: {

@@ -9,7 +9,7 @@ import HomeScreen from '../screens/HomeScreen';
 import ForgotPasswordScreen from '../screens/ForgotPasswordScreen';
 import ActivateAccountScreen from '../screens/ActivateAccountScreen';
 // import NewPasswordScreen from '../screens/NewPasswordScreen';
-import CodeConfirmationScreen from '../screens/CodeConfirmationScreen';
+import ConfirmScreen from '../screens/ConfirmScreen';
 import ResetPasswordScreen from '../screens/ResetPasswordScreen';
 import GeneratePasswordScreen from '../screens/GeneratePasswordScreen';
 // import Nav from './Nav';
@@ -29,10 +29,7 @@ const Navigaton = () => {
           component={ActivateAccountScreen}
         />
 
-        <Stack.Screen
-          name="CodeConfirmation"
-          component={CodeConfirmationScreen}
-        />
+        <Stack.Screen name="ConfirmScreen" component={ConfirmScreen} />
         <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
         <Stack.Screen
           name="GeneratePassword"
