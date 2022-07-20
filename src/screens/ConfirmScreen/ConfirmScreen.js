@@ -5,7 +5,6 @@ import {
   ScrollView,
   Image,
   useWindowDimensions,
-  TextInput,
 } from 'react-native';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
@@ -33,18 +32,23 @@ const ConfirmScreen = () => {
       <View style={styles.root}>
         <Image
           source={mark}
-          style={[styles.logo, {height: height * 0.25}]}
+          style={[styles.logo, {height: height * 0.23}]}
           resizeMode="contain"
         />
-
-        <Text style={{fontWeight: 'bold', color: '#191970', fontSize: 30}}>
+        <Text>{'\n'}</Text>
+        <Text style={{color: 'black', fontSize: 15}}>
+          ────────────────────────────────{'\n'}
+        </Text>
+        <Text style={{fontWeight: 'bold', color: '#191970', fontSize: 27}}>
           We have sent an e-mail!
         </Text>
-        <Text style={{fontWeight: 'bold', color: '#191970', fontSize: 29}}>
+        <Text style={{fontWeight: 'bold', color: '#191970', fontSize: 27}}>
           Please check your mail-box.
         </Text>
-
         <Text>{'\n'}</Text>
+        <Text style={{color: 'black', fontSize: 15}}>
+          ────────────────────────────────{'\n'}
+        </Text>
 
         <CustomButton
           text="Back to Sign In"
@@ -69,8 +73,8 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: '80%',
-    maxWidth: 350,
-    maxHeight: 350,
+    maxWidth: 300,
+    maxHeight: 300,
   },
 });
 
